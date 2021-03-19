@@ -1,7 +1,8 @@
+//Primero iniciar el mongodb
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-                            //user:pwd@servidor:puerto/name_bd
+                            //user:pwd@servidor:puerto/name_bd 
 mongoose.connect('mongodb://dev:dev@localhost:27017/todos',{useNewUrlParser:true,useUnifiedTopology:true});
 
 const connection = mongoose.connection;
