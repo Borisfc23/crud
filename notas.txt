@@ -1,2 +1,10 @@
-1. npm init --yes
-2. npm i express mongoose  => De esta forma instalas express y mongoose
+1. npm i express mongoose  => De esta forma instalas express y mongoose
+2.usa la bd todos en mongodb
+3.db.createUser({
+    user:'dev',
+    pwd:'dev',
+    roles:[{
+        role:'readWrite',
+        db:'todos'
+    }]
+})
