@@ -22,13 +22,13 @@ connection.on('error',(err)=>{
 const Todo = mongoose.model('Todo',{text: String, completed: Boolean});
 
 app.post('/add',(req,res)=>{//Aqui hago una consulta al body del index con name text
-    const registro = new Todo({text: req.body.text, completed: false});
-
+    const registro = new Todo({text: req.body.text, completed: false});    
     //save() trabaja con promesas
     registro.save()//
         .then(doc =>{ 
             console.log('Datos insertado correctamente...', doc);
             res.json({response:'success'});
+            // res.redirect('/');//Te redirecciona al indice principal                          
         }).catch(err =>{
             console.log('Error al insertar...',err);
             res.status(400).json({response: 'failed'});//Error que se mostrara en el Fronted
@@ -37,7 +37,7 @@ app.post('/add',(req,res)=>{//Aqui hago una consulta al body del index con name 
 
 //En esta ruta obtendremos todos los elementos de la base de datos
 app.get('/getall',(req,res)=>{
-    Todo.find({},'text completed')//Puedes hacer una busqueda dependiendo de la propiedad
+    Todo.find({},'_id text completed')//Puedes hacer una busqueda dependiendo de la propiedad
         .then(doc =>{
             res.json({
                 response: 'success',
@@ -69,7 +69,8 @@ app.get('/delete/:id',(req,res)=>{
     const id = req.params.id;
     Todo.findByIdAndDelete({_id:id})
         .then(doc=>{
-            res.json({response:'success'});
+            // res.json({response:'success'});
+            res.redirect('/');
         })
         .catch(err=>{
             console.log('Error al borrar el registro',err);
